@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\StudentController;
+use App\Http\Controllers\PizzaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('pizzas', [PizzaController::class, 'index']);
+Route::post('pizzas', [PizzaController::class, 'upload']);
+Route::put('pizzas/edit/{id}', [PizzaController::class, 'edit']);
+Route::delete('pizzas/{id}', [PizzaController::class, 'delete']);
+Route::get('students', [StudentController::class, 'index']);

@@ -13,6 +13,38 @@
 - php artisan migrate --force 
 - composer require laravel/breeze --dev
 - php artisan breeze:install
+    -   $table->id();
+    -   $table->foreignIdFor(User::class);
+    -   $table->string('size');
+    -   $table->string('crust');
+    -   $table->json('toppings');
+    -   $table->string('status');
+- php artisan migrate
+- php artisan make:factory PizzaFactory --model=Pizza 
+
+- add these to database seeder   public function run(): void
+    {
+        \App\Models\User::factory(10)->create();
+        \App\Models\Pizza::factory(20)->create();
+    }
+- php artisan db:seed
+- Array to string error occured to resolve this error
+- To resolve this error, you need to add the following line to the Pizza model:
+    
+    class Pizza extends Model
+    {
+        use HasFactory;
+        protected $guarded = [];
+
+        protected $casts = [
+            'toppings' => 'array'
+        ];
+
+        public function user()
+        {
+            return $this->belongsTo(User::class);
+        }
+    }
 
 ## About Laravel
 
